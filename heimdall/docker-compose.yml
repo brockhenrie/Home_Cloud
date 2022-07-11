@@ -1,0 +1,21 @@
+version: "2.1"
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: home - heimdall
+    networks:
+      - proxy
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Phoenix
+    volumes:
+      - /home/${YOUR_USER}/Home_Cloud/heimadall/data:/config
+    ports:
+      - 680:80
+      - 2443:443
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true

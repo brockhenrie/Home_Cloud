@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  rancher:
+    image: rancher/rancher:v2.6-head
+    ports:
+      - 580:80
+      - 5443:443
+    container_name: rancher
+    networks:
+      - proxy
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /home/${YOUR_USER}/Home_Cloud/rancher/data:/var/lib/rancher
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rancher.entrypoints=web,websecure"
+      - "traefik.http.routers.rancher.rule=Host(`rancher.example.com`)"
+      - "traefik.http.routers.rancher.tls=true"
+      - "traefik.http.services.rancher.loadbalancer.server.port=5443"
+      - "traefik.http.services.rancher.loadbalancer.server.scheme=websecure"
+      - "traefik.http.routers.rancher.tls.certresolver=cloudflare"
+      - "traefik.http.routers.rancher.tls.domains[0].main=rancher.mantisd.cloud"
+      - "traefik.http.routers.rancher.service=rancher@docker"
+    dns:
+      - 10.10.10.25    #these are your local DNS server, included is pihole docker-compose
+      - 192.168.0.20   # yours may look like this ip
+
+
+#Dont forget this 
+networks:
+  default:
+    external:
+      name: proxy
+

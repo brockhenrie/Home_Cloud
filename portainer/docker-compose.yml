@@ -10,6 +10,8 @@ services:
       - 9000:9000
       - 9443:9443
     container_name: portainer
+    networks:
+      - proxy
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
@@ -21,20 +23,19 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.entrypoints=web,websecure"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.mantisd.cloud`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.example.com`)"
       - "traefik.http.routers.portainer.tls=true"
       - "traefik.http.services.portainer.loadbalancer.server.port=9443"
-      - "traefik.http.services.portainer.loadbalancer.server.scheme=https"
+      - "traefik.http.services.portainer.loadbalancer.server.scheme=websecure"
       - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
       - "traefik.http.routers.portainer.tls.domains[0].main=portainer.mantisd.cloud"
       - "traefik.http.routers.portainer.service=portainer@docker"
-#    command:
-#      --sslcert /certs/portainer.pem
-#      --sslkey /certs/portainer.private.key
     dns:
-      - 10.10.10.25
-      - 10.10.10.26
+      - 10.10.10.25    #these are your local DNS server, included is pihole docker-compose
+      - 192.168.0.20   # yours may look like this ip
 
+
+#Dont forget this 
 networks:
   default:
     external:

@@ -5,12 +5,17 @@ Repository for my home cloud reverse proxy with tls certificates hooked up to cl
 ## Getting started
  
 git clone into your home directory ~/ and cd into traefik and edit the docker-compose.yml to match your domain name and information 
+
 ```
 chmod 600 data/acme.json
 
-docker-compose up -d 
+chmod 600 data/syn-acme.json  #If another certificate resolver is added
 
-docker logs traefik 
+sudo docker network create proxy
+
+sudo docker-compose up -d 
+
+sudo docker logs traefik 
 
 ```
 

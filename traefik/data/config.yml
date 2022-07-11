@@ -5,7 +5,7 @@ http:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "Host(`proxmox.mantisd.cloud`)"
+      rule: "Host(`proxmox.example.com`)"
       middlewares:
         - default-headers
         - https-redirectscheme
@@ -15,7 +15,7 @@ http:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "Host(`pihole.mantisd.cloud`)"
+      rule: "Host(`pihole.example.com`)"
       middlewares:
         - default-headers
         - addprefix-pihole
@@ -26,37 +26,28 @@ http:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "Host(`pihole2.mantisd.cloud`)"
+      rule: "Host(`pihole2.example.com`)"
       middlewares:
         - default-headers
         - addprefix-pihole
         - https-redirectscheme
       tls: {}
       service: pihole2
-#    homebridge:
-#      entryPoints:
-#        - "https"
-#     rule: "Host(`homebridge.local.example.com`)"
-#     middlewares:
-#       - default-headers
-#       - https-redirectscheme
-#     tls: {}
-#     service: homebridge
 #   homeassistant:
       # For Homeassistant config, check: https://www.home-assistant.io/integrations/http/#reverse-proxies
       # This relies on Homeassistant using http. No certs are needed in the Homeassistant config.
 #     entryPoints:
 #        - "https"
-#     rule: "Host(`homeassistant.local.example.com`)"
+#     rule: "Host(`homeassistant.example.com`)"
 #     middlewares:
 #       - default-headers
 #       - https-redirectscheme
 #     tls: {}
 #     service: homeassistant
-#   syncthing:
+#   syncthing:                                 
 #     entryPoints:
 #       - "https"
-#     rule: "Host(`syncthing.local.example.com`)"
+#     rule: "Host(`syncthing.example.com`)"
 #     middlewares:
 #       - default-headers
 #       - https-redirectscheme
@@ -66,22 +57,22 @@ http:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "Host(`syn.mantisd.cloud`)"
+      rule: "Host(`syn.example.com`)"
       middlewares:
         - default-headers
         - https-redirectscheme
       tls:
-        certresolver: syn-cloudflare
-        domains:
-          - main: "syn.mantisd.cloud"
-            sans:
-              - "*.syn.mantisd.cloud"
+#        certresolver: syn-cloudflare this adds a resolver for another layer deep of sub domains
+#        domains:
+#          - main: "syn.mantisd.cloud"
+#            sans:
+#              - "*.syn.mantisd.cloud"
       service: synology
     plex:
       entryPoints:
         - "websecure"
         - "web"
-      rule: "Host(`plex.mantisd.cloud`)"
+      rule: "Host(`plex.example.com`)"
       middlewares:
         - default-headers
         - https-redirectscheme
@@ -90,26 +81,26 @@ http:
 #    minio:
 #      entryPoints:
 #       - "https"
-#     rule: "Host(`minio.local.example.com`)"
+#     rule: "Host(`minio.example.com`)"
 #     middlewares:
 #       - default-headers
 #       - https-redirectscheme
 #     tls: {}
 #     service: minio
-    rancher:
-       entryPoints:
-         - "websecure"
-         - "web"
-       rule: "Host(`rancher.mantisd.cloud`)"
-       middlewares:
-         - default-headers
-         - https-redirectscheme
-       tls: {}
-       service: rancher
+    # rancher:
+    #    entryPoints:
+    #      - "websecure"
+    #      - "web"
+    #    rule: "Host(`rancher.example.com`)"
+    #    middlewares:
+    #      - default-headers
+    #      - https-redirectscheme
+    #    tls: {}
+    #    service: rancher
 #    idrac:
 #      entryPoints:
 #       - "https"
-#     rule: "Host(`idrac.local.example.com`)"
+#     rule: "Host(`idrac.example.com`)"
 #     middlewares:
 #       - idrac
 #       - https-redirectscheme
@@ -127,21 +118,13 @@ http:
 #   opnsense:
 #     entryPoints:
 #       - "https"
-#     rule: "Host(`opnsense.local.example.com`)"
+#     rule: "Host(`opnsense.example.com`)"
 #     middlewares:
 #       - default-headers
 #       - https-redirectscheme
 #     tls: {}
 #     service: opnsense
-#    pterodactyl:
-#      entryPoints:
-#       - "https"
-#     rule: "Host(`pterodactyl.local.example.com`)"
-#     middlewares:
-#       - default-headers
-#        - https-redirectscheme
-#      tls: {}
-#      service: pterodactyl
+
 
 #endregion
 #region services
@@ -161,11 +144,6 @@ http:
         servers:
           - url: "http://10.10.10.26:80"
         passHostHeader: true
-#   homebridge:
-#      loadBalancer:
-#       servers:
-#         - url: "http://192.168.0.102:10999"
-#       passHostHeader: true
 #    homeassistant:
 #      loadBalancer:
 #       servers:
@@ -191,11 +169,11 @@ http:
 #       servers:
 #          url: "https://192.168.0.106:9000/"
 #       passHostHeader: true
-    rancher:
-      loadBalancer:
-        servers:
-          - url: "https://10.10.10.99"
-        passHostHeader: true
+    # rancher:
+    #   loadBalancer:
+    #     servers:
+    #       - url: "https://10.10.10.99"
+    #     passHostHeader: true
 #   idrac:
 #      loadBalancer:
 #       servers:
@@ -211,11 +189,7 @@ http:
 #        servers:
 #          - url: "https://192.168.0.109"
 #        passHostHeader: true
-#   pterodactyl:
-#      loadBalancer:
-#        servers:
-#         - url: "http://192.168.0.110:80"
-#       passHostHeader: true
+
 #endregion
   middlewares:
     addprefix-pihole:
@@ -226,7 +200,7 @@ http:
         scheme: https
         permanent: true
 
-    default-headers:
+    default-headers:      #these will work for use with proxmox
       headers:
         frameDeny: true
         browserXssFilter: true
@@ -254,8 +228,10 @@ http:
       ipWhiteList:
         sourceRange:
           - "10.0.0.0/8"
-          - "192.168.0.0/16"
+          - "192.168.0.0/24"
           - "172.16.0.0/12"
+          - "10.10.10.1/24"
+      
     secured:
       chain:
         middlewares:

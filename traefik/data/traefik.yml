@@ -4,11 +4,11 @@ api:
 entryPoints:
   web:
     address: ":80"
-    http:
-      redirections:
-        entryPoint:
-          to: websecure
-          scheme: https
+    http:               
+      redirections:      #  always redirects http to https,  
+        entryPoint:      #  middleware is also used along this
+          to: websecure  #  so if you disable this all routes 
+          scheme: https  #  that need https will keep https.
   websecure:
     address: ":443"
 serversTransport:
@@ -22,19 +22,19 @@ providers:
 certificatesResolvers:
   cloudflare:
     acme:
-      email: bhenriedev@gmail.com
+      email: youremail@example.com
       storage: acme.json
       dnsChallenge:
         provider: cloudflare
         resolvers:
           - "1.1.1.1:53"
           - "1.0.0.1:53"
-  syn-cloudflare:
-    acme:
-      email: bhenriedev@gmail.com
-      storage: syn-acme.json
-      dnsChallenge:
-        provider: cloudflare
-        resolvers:
-          - "1.1.1.1:53"
-          - "1.0.0.1:53"
+  # syn-cloudflare:
+  #   acme:
+  #     email: youremail@example.com
+  #     storage: syn-acme.json
+  #     dnsChallenge:
+  #       provider: cloudflare
+  #       resolvers:
+  #         - "1.1.1.1:53"
+  #         - "1.0.0.1:53"
