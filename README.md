@@ -1,4 +1,14 @@
 ## Home Cloud
+***** FEEL FREE TO FORK OR UPDATE ******
+This is a project that has a traefik reverse proxy hosted in a docker container than will resolve SSL Certificates for your automatically with your cloudflare registered account and domain. Pihole is then used as a DNS server locally. You can port forward the server on port 443 to the traefik instance and set up your DNS in cloudflare, or point your computers DNS to your pihole and use the pihole DNS for a private home network.
+
+Looking into 
+* Terraform controlled pihole records
+* Terraform controlled Cloudflare Records
+* Terraform Proxmox
+* Converting docker compose into terraform code
+
+## SETUP
 To set up the home cloud project you must have
 
 - [ ] A linux server or VM to run this on
@@ -6,6 +16,7 @@ To set up the home cloud project you must have
 - [ ] A Cloudflare Account
 - [ ] Domain Registered on Cloudflare Account
 - [ ] Docker and docker-compose installed
+- [ ] A DNS server such as pihole
 
 ## Install Docker
 ```
