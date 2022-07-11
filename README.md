@@ -7,6 +7,17 @@ To set up the home cloud project you must have
 - [ ] Domain Registered on Cloudflare Account
 - [ ] Docker and docker-compose installed
 
+## Install Docker
+```
+curl -sSL https://get.docker.com | bash
+sudo usermod -aG docker $(whoami)
+systemctl enable docker.service
+systemctl start docker.service
+```
+## Install docker-compose
+```
+sudo apt install docker-compose -y
+```
 
 ## Install 
 Go into your linux server home directory
