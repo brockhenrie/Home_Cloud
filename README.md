@@ -1,5 +1,6 @@
 ## Home Cloud
 ***** FEEL FREE TO FORK OR UPDATE ******
+
 This is a project that has a traefik reverse proxy hosted in a docker container than will resolve SSL Certificates for your automatically with your cloudflare registered account and domain. Pihole is then used as a DNS server locally. You can port forward the server on port 443 to the traefik instance and set up your DNS in cloudflare, or point your computers DNS to your pihole and use the pihole DNS for a private home network.
 
 Looking into 
