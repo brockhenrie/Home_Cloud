@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"pihole_1","Source":"./modules/pihole-records","Dir":"modules/pihole-records"},{"Key":"pihole_2","Source":"./modules/pihole-records","Dir":"modules/pihole-records"},{"Key":"clouflare","Source":"./modules/cloudflare","Dir":"modules/cloudflare"}]}
