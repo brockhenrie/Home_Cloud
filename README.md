@@ -83,3 +83,4 @@ Set Correct Labels
 - [ ] traefik.http.routers.<ROUTERNAME>.entrypoints=web,websecure
 - [ ] traefik.http.routers.<ROUTERNAME>.rule=Host(`subdomain.example.com`)
 - [ ] traefik.http.routers.<ROUTERNAME>.tls=true
+ 
